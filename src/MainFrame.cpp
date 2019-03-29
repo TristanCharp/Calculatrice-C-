@@ -23,9 +23,9 @@ MainFrame::MainFrame(const wxString title,const wxPoint& pos, const wxSize& size
 	btnMr->Disable();
 
 	
-	btnMclear->SetBackgroundColour(wxColour(255,255,0,100));
-	btnMplus->SetBackgroundColour(wxColour(255,255,0,100));
-	btnMr->SetBackgroundColour(wxColour(255,255,0,100));
+	btnMclear->SetBackgroundColour(wxColour(0,0,255,100));
+	btnMplus->SetBackgroundColour(wxColour(0,0,255,100));
+	btnMr->SetBackgroundColour(wxColour(0,0,255,100));
 	
 
 
@@ -42,10 +42,10 @@ MainFrame::MainFrame(const wxString title,const wxPoint& pos, const wxSize& size
 	
 	btnPi = new wxButton(this, ID_BTN_PI, wxString::FromUTF8("\xF0\x9D\x9B\x91")); // Création du bouton Pi
 
-	btnPG->SetBackgroundColour(wxColour(255,255,0,100));
+	btnPG->SetBackgroundColour(wxColour(255,255,255,100));
 	
 	
-	btnPi->SetBackgroundColour(wxColour(255,255,0,100));
+	btnPi->SetBackgroundColour(wxColour(255,255,255,100));
 
 
 	gridButton->Add(btnPG,0,wxEXPAND);
@@ -110,7 +110,7 @@ MainFrame::MainFrame(const wxString title,const wxPoint& pos, const wxSize& size
 	btnNeg = new wxButton(this, ID_BTN_NEG, _T("(-)")); // Création du bouton "-"
 	btnEgal = new wxButton(this, ID_BTN_EGAL, _T("=")); // Création du bouton "Egale"	
 	
-	btnEgal->SetBackgroundColour(wxColour(0,255,0,100));
+	btnEgal->SetBackgroundColour(wxColour(0,255,255,100));
 	
 	gridButton->Add(btn0,0,wxEXPAND);
 	gridButton->Add(btnPoint,0,wxEXPAND);
@@ -124,7 +124,7 @@ MainFrame::MainFrame(const wxString title,const wxPoint& pos, const wxSize& size
 	
 	sizer_principal->Add(gridButton, 1, wxEXPAND); //Ajoute la grille au size principal
 	SetSizer(sizer_principal); //Le sizer principal prend toute la fenêtre
-	SetMinSize(wxSize(400, 400)); //Taille minimal de la fenêtre
+	SetMinSize(wxSize(500, 500)); //Taille minimal de la fenêtre
 
 	Centre(); //Centre
 }
@@ -154,35 +154,35 @@ void MainFrame::OnButton_NEG_Clicked(wxCommandEvent &event){
 	calcul="n"; //Mais écrit n dans le calcul
 }
 void MainFrame::OnButton_0_Clicked(wxCommandEvent &event){
-	*txtCalcInput << "0.0";
+	*txtCalcInput << "0";
 	calcul="0.0";
 }
 void MainFrame::OnButton_1_Clicked(wxCommandEvent &event){
-	*txtCalcInput << "1.0";
+	*txtCalcInput << "1";
 	calcul="1.0";
 }
 void MainFrame::OnButton_2_Clicked(wxCommandEvent &event){
-	*txtCalcInput << "2.0";
+	*txtCalcInput << "2";
 	calcul="2.0";
 }
 void MainFrame::OnButton_3_Clicked(wxCommandEvent &event){
-	*txtCalcInput << "3.0";
+	*txtCalcInput << "3";
 	calcul="3.0";
 }
 void MainFrame::OnButton_4_Clicked(wxCommandEvent &event){
-	*txtCalcInput << "4.0";
+	*txtCalcInput << "4";
 	calcul="4.0";
 }
 void MainFrame::OnButton_5_Clicked(wxCommandEvent &event){
-	*txtCalcInput << "5.0";
+	*txtCalcInput << "5";
 	calcul="5.0";
 }
 void MainFrame::OnButton_6_Clicked(wxCommandEvent &event){
-	*txtCalcInput << "6.0";
+	*txtCalcInput << "6";
 	calcul="6.0";
 }
 void MainFrame::OnButton_7_Clicked(wxCommandEvent &event){
-	*txtCalcInput << "7.0";
+	*txtCalcInput << "7";
 	calcul="7.0";
 }
 void MainFrame::OnButton_8_Clicked(wxCommandEvent &event){
@@ -190,16 +190,16 @@ void MainFrame::OnButton_8_Clicked(wxCommandEvent &event){
 	calcul="8.0";
 }
 void MainFrame::OnButton_9_Clicked(wxCommandEvent &event){
-	*txtCalcInput << "9.0";
+	*txtCalcInput << "9";
 	calcul="9.0";
 }
 void MainFrame::OnButton_PI_Clicked(wxCommandEvent &event){
 	*txtCalcInput << wxString::FromUTF8("\xF0\x9D\x9B\x91"); //Affiche PI
-	calcul=PI; //Mais ecrit 3.14 entre parenthèse pour protéger la valeur
+	calcul="3.14"; //Mais ecrit 3.14 entre parenthèse pour protéger la valeur
 }
 void MainFrame::OnButton_PG_Clicked(wxCommandEvent &event){
 	*txtCalcInput << "^2";
-	calcul="^2";
+	calcul="²";
 }
 
 void MainFrame::OnButton_DEL_Clicked(wxCommandEvent &event){
@@ -221,13 +221,14 @@ void MainFrame::OnButton_AC_Clicked(wxCommandEvent &event){
 void MainFrame::OnButton_EGAL_Clicked(wxCommandEvent &event){
 	calcul = c.calcule();
 	if(!calcul.empty()){
+		cout << "le resultat : " << calcul << endl;
 		//////JACQUES///////
 		//c.appendPile(calcul);
 		////////////////////
-
+		c.flushPile();
 		txtCalcInput->Clear(); //Efface la zone d'affichage
 		*txtCalcInput << calcul; //Affiche le resultat
-		calcul=c.getResult(); //Stock le resultat dans calcul pour faire un nouveau calcul avec le resultat
+		//calcul=c.getResult(); //Stock le resultat dans calcul pour faire un nouveau calcul avec le resultat
 
 	}
 }
@@ -235,26 +236,17 @@ void MainFrame::OnButton_EGAL_Clicked(wxCommandEvent &event){
 
 void MainFrame::OnButton_MCLEAR_Clicked(wxCommandEvent &event){
 	//La touche MC permet d’effacer la mémoire.
-	if(!save.empty())
-		{save.clear();}
-		btnMclear->Disable();
-		btnMr->Disable();
+	c.flushPile();
 	//Penser à déactiver un bouton MC dans le cas où y a rien dans la mémoire (regarder comment le déactiver )
 	
 }
 void MainFrame::OnButton_MPLUS_Clicked(wxCommandEvent &event){ 
 	//La touche M+ permet d’ajouter le nombre actuellement affiché sur l'écran de la calculatrice à la mémoire
 	c.appendPile(calcul);
-	double val;
-	if(txtCalcInput->GetValue() .ToDouble(&val))
-    {   
-	 	if(!save.empty()){
-	    		save.clear(); //effacer le contenu de la chaine si la varaibale save n'est pas vide.
-	    	}
-	    	save <<val;
+
 	    btnMclear->Enable();
    		btnMr->Enable();
-	}	
+	
 }
 void MainFrame::OnButton_MR_Clicked(wxCommandEvent &event){
 

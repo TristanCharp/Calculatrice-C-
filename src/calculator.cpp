@@ -233,6 +233,7 @@ string Calculator::calcule()	// fonction de calcul par notation polonaise postfi
     {
         return to_string(divi(sizeO, true));
     }
+	
 return "error";
 
 	// if(input == "+")
@@ -576,6 +577,8 @@ void Calculator::appendPile(string calcul){
 }
 
 void Calculator::flushPile(){
+	operators.clear();
+	chiffres.clear();
 	while(!(this->operandes.empty())){
 		this->operandes.pop();
 	}
