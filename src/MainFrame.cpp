@@ -80,6 +80,8 @@ MainFrame::MainFrame(const wxString title,const wxPoint& pos, const wxSize& size
 	btnX->SetBackgroundColour(wxColour(0,255,0,100));
 	btnDiv->SetBackgroundColour(wxColour(0,255,0,100));
 
+
+
 	gridButton->Add(btn4,0,wxEXPAND);
 	gridButton->Add(btn5,0,wxEXPAND);
 	gridButton->Add(btn6,0,wxEXPAND);
@@ -107,13 +109,17 @@ MainFrame::MainFrame(const wxString title,const wxPoint& pos, const wxSize& size
 	btnPoint = new wxButton(this, ID_BTN_POINT, _T(".")); // Création du bouton "."
 	btnNeg = new wxButton(this, ID_BTN_NEG, _T("(-)")); // Création du bouton "-"
 	btnEgal = new wxButton(this, ID_BTN_EGAL, _T("=")); // Création du bouton "Egale"	
+	btnEnter = new wxButton(this, ID_BTN_ENTER, _T("ENTER")); // Création du bouton "Enter"	
 
 	btnEgal->SetBackgroundColour(wxColour(0,255,0,100));
+	btnEnter->SetBackgroundColour(wxColour(0,255,0,100));
 
 	gridButton->Add(btn0,0,wxEXPAND);
 	gridButton->Add(btnPoint,0,wxEXPAND);
 	gridButton->Add(btnNeg,0,wxEXPAND);
 	gridButton->Add(btnEgal,0,wxEXPAND);
+	gridButton->Add(btnEnter,0,wxEXPAND);
+
 
 /**************************************************/
 
@@ -150,35 +156,35 @@ void MainFrame::OnButton_NEG_Clicked(wxCommandEvent &event){
 	calcul+="n"; //Mais écrit n dans le calcul
 }
 void MainFrame::OnButton_0_Clicked(wxCommandEvent &event){
-	*txtCalcInput << "0";
+	*txtCalcInput << "0.0";
 	calcul+="0";
 }
 void MainFrame::OnButton_1_Clicked(wxCommandEvent &event){
-	*txtCalcInput << "1";
+	*txtCalcInput << "1.0";
 	calcul+="1";
 }
 void MainFrame::OnButton_2_Clicked(wxCommandEvent &event){
-	*txtCalcInput << "2";
+	*txtCalcInput << "2.0";
 	calcul+="2";
 }
 void MainFrame::OnButton_3_Clicked(wxCommandEvent &event){
-	*txtCalcInput << "3";
+	*txtCalcInput << "3.0";
 	calcul+="3";
 }
 void MainFrame::OnButton_4_Clicked(wxCommandEvent &event){
-	*txtCalcInput << "4";
+	*txtCalcInput << "4.0";
 	calcul+="4";
 }
 void MainFrame::OnButton_5_Clicked(wxCommandEvent &event){
-	*txtCalcInput << "5";
+	*txtCalcInput << "5.0";
 	calcul+="5";
 }
 void MainFrame::OnButton_6_Clicked(wxCommandEvent &event){
-	*txtCalcInput << "6";
+	*txtCalcInput << "6.0";
 	calcul+="6";
 }
 void MainFrame::OnButton_7_Clicked(wxCommandEvent &event){
-	*txtCalcInput << "7";
+	*txtCalcInput << "7.0";
 	calcul+="7";
 }
 void MainFrame::OnButton_8_Clicked(wxCommandEvent &event){
@@ -186,7 +192,7 @@ void MainFrame::OnButton_8_Clicked(wxCommandEvent &event){
 	calcul+="8";
 }
 void MainFrame::OnButton_9_Clicked(wxCommandEvent &event){
-	*txtCalcInput << "9";
+	*txtCalcInput << "9.0";
 	calcul+="9";
 }
 void MainFrame::OnButton_PI_Clicked(wxCommandEvent &event){
@@ -209,15 +215,21 @@ void MainFrame::OnButton_DEL_Clicked(wxCommandEvent &event){
 }
 void MainFrame::OnButton_AC_Clicked(wxCommandEvent &event){
 	txtCalcInput->Clear();
+	c.flushPile();
 	calcul.clear();
 }
 void MainFrame::OnButton_EGAL_Clicked(wxCommandEvent &event){
 	if(!calcul.empty()){
-		Calculator c(calcul); //Effectue le calcul
+		c.appendPile(calcul);
+		//Calculator c(calcul); //Effectue le calcul
 		txtCalcInput->Clear(); //Efface la zone d'affichage
 		*txtCalcInput << c.getResult(); //Affiche le resultat
 		calcul=c.getResult(); //Stock le resultat dans calcul pour faire un nouveau calcul avec le resultat
 	}
+}
+
+void MainFrame::OnButton_ENTER_Clicked(wxCommandEvent &event){
+
 }
 
 void MainFrame::OnButton_MCLEAR_Clicked(wxCommandEvent &event){
@@ -277,6 +289,7 @@ BEGIN_EVENT_TABLE(MainFrame,wxFrame)
 	EVT_BUTTON(ID_BTN_DEL, MainFrame::OnButton_DEL_Clicked)
 	EVT_BUTTON(ID_BTN_AC, MainFrame::OnButton_AC_Clicked)
 	EVT_BUTTON(ID_BTN_EGAL, MainFrame::OnButton_EGAL_Clicked)
+	EVT_BUTTON(ID_BTN_ENTER, MainFrame::OnButton_ENTER_Clicked)
 
 	EVT_BUTTON(ID_BTN_MPLUS, MainFrame::OnButton_MPLUS_Clicked)
 	EVT_BUTTON(ID_BTN_MCLEAR, MainFrame::OnButton_MCLEAR_Clicked)
