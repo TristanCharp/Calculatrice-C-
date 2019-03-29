@@ -14,7 +14,7 @@ MainFrame::MainFrame(const wxString title,const wxPoint& pos, const wxSize& size
 
 	sizer_principal->Add(txtCalcInput, 0, wxEXPAND | wxTOP | wxBOTTOM, 4); //Ajout de la zone de txt
 
-	gridButton = new wxGridSizer(5, 5, 3, 4); //Grille 5 lignes 5 colonnes 3 d'espacement en haut et en bas
+	gridButton = new wxGridSizer(5, 5, 3, 4); //Grille 8 lignes 5 colonnes 3 d'espacement en haut et en bas
 
 	btnMclear = new wxButton(this, ID_BTN_MCLEAR, _T("MC")); // Création du bouton MCLEAR
 	btnMclear->Disable();
@@ -92,7 +92,7 @@ MainFrame::MainFrame(const wxString title,const wxPoint& pos, const wxSize& size
 	btn1 = new wxButton(this, ID_BTN_1, _T("1")); // Création du bouton "1"
 	btn2 = new wxButton(this, ID_BTN_2, _T("2")); // Création du bouton "2"
 	btn3 = new wxButton(this, ID_BTN_3, _T("3")); // Création du bouton "3"
-	btnPlus = new wxButton(this, ID_BTN_PLUS, _T("+")); // Création du bouton "+"
+	btnPlus = new wxButton(this, ID_BTN_PLUS, _T("+")); // Création du bouton "Delete"
 	btnMoins = new wxButton(this, ID_BTN_MOINS, _T("-")); // Création du bouton "-"
 
 	btnPlus->SetBackgroundColour(wxColour(0,255,0,100));
@@ -107,7 +107,7 @@ MainFrame::MainFrame(const wxString title,const wxPoint& pos, const wxSize& size
 
 	btn0 = new wxButton(this, ID_BTN_0, _T("0")); // Création du bouton "0"
 	btnPoint = new wxButton(this, ID_BTN_POINT, _T(".")); // Création du bouton "."
-	btnNeg = new wxButton(this, ID_BTN_NEG, _T("(-)")); // Création du bouton "(-)"
+	btnNeg = new wxButton(this, ID_BTN_NEG, _T("(-)")); // Création du bouton "-"
 	btnEgal = new wxButton(this, ID_BTN_EGAL, _T("=")); // Création du bouton "Egale"	
 	btnEnter = new wxButton(this, ID_BTN_ENTER, _T("ENTER")); // Création du bouton "Enter"	
 
@@ -157,43 +157,43 @@ void MainFrame::OnButton_NEG_Clicked(wxCommandEvent &event){
 }
 void MainFrame::OnButton_0_Clicked(wxCommandEvent &event){
 	*txtCalcInput << "0.0";
-	calcul+="0";
+	calcul+="0.0";
 }
 void MainFrame::OnButton_1_Clicked(wxCommandEvent &event){
 	*txtCalcInput << "1.0";
-	calcul+="1";
+	calcul+="1.0";
 }
 void MainFrame::OnButton_2_Clicked(wxCommandEvent &event){
 	*txtCalcInput << "2.0";
-	calcul+="2";
+	calcul+="2.0";
 }
 void MainFrame::OnButton_3_Clicked(wxCommandEvent &event){
 	*txtCalcInput << "3.0";
-	calcul+="3";
+	calcul+="3.0";
 }
 void MainFrame::OnButton_4_Clicked(wxCommandEvent &event){
 	*txtCalcInput << "4.0";
-	calcul+="4";
+	calcul+="4.0";
 }
 void MainFrame::OnButton_5_Clicked(wxCommandEvent &event){
 	*txtCalcInput << "5.0";
-	calcul+="5";
+	calcul+="5.0";
 }
 void MainFrame::OnButton_6_Clicked(wxCommandEvent &event){
 	*txtCalcInput << "6.0";
-	calcul+="6";
+	calcul+="6.0";
 }
 void MainFrame::OnButton_7_Clicked(wxCommandEvent &event){
 	*txtCalcInput << "7.0";
-	calcul+="7";
+	calcul+="7.0";
 }
 void MainFrame::OnButton_8_Clicked(wxCommandEvent &event){
 	*txtCalcInput << "8";
-	calcul+="8";
+	calcul+="8.0";
 }
 void MainFrame::OnButton_9_Clicked(wxCommandEvent &event){
 	*txtCalcInput << "9.0";
-	calcul+="9";
+	calcul+="9.0";
 }
 void MainFrame::OnButton_PI_Clicked(wxCommandEvent &event){
 	*txtCalcInput << wxString::FromUTF8("\xF0\x9D\x9B\x91"); //Affiche PI
