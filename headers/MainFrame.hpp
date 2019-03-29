@@ -37,6 +37,8 @@ class MainFrame : public wxFrame{ //dérivée de wxFrame
 		wxButton *btnMplus, *btnMr, *btnMclear;
 /**********************************************************************************************************/
 
+		Calculator c;
+
 		void OnButton_DEL_Clicked(wxCommandEvent &event);
 		void OnButton_AC_Clicked(wxCommandEvent &event);
 		void OnButton_EGAL_Clicked(wxCommandEvent &event);
