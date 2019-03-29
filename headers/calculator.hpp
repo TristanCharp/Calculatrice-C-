@@ -3,6 +3,7 @@
 
 #include <list>
 #include <iostream>
+#include <vector> 
 
 #include "fonction_math.hpp"
 #include "Erreur.hpp"
@@ -16,6 +17,11 @@ class Calculator{
 		string calcul;
 		string result;
 		list<string> *calc_postfix;
+		Pile operandes;
+		vector<string> operators;
+        vector <float> chiffres;
+        int sizeO = 0;
+        int sizeC = 0;
 		
 	/***********************************************************************************/
 	/*		M E T H O D E 		I N I T I A L I S A T I O N 	*/
@@ -36,11 +42,17 @@ class Calculator{
 		
 	public:
 		Calculator(string calcul);
-		~Calculator();
+		Calculator();
 		string getCalcul();
 		string getResult();
 		void appendPile(string calcul);
 		void flushPile(void);
+		float moinss(int i, bool isFirts);
+        float divi(int i, bool isFirts);
+        float mult(int i, bool isFirts);
+        float pluss(int i, bool isFirts);
+        string calcule();
+		bool isOperator(string buffer);
 };
 
 #endif
